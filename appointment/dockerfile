@@ -1,0 +1,16 @@
+FROM node:18-slim
+
+LABEL author="aruntomsan"
+
+WORKDIR /usr/src/app
+
+COPY package*.json ./
+
+# Install dependencies
+RUN npm install express
+
+# Copy the rest of your application code
+COPY . .
+
+# Command to run your app
+CMD [ "npm", "start" ]
