@@ -9,7 +9,7 @@ on:
 env:
   AWS_REGION: ap-south-1                 
   ECR_REGISTRY: 014498640594.dkr.ecr.ap-south-1.amazonaws.com
-  REPO_NAME: dev-patient-ecr-repo
+  REPO_NAME: dev-patient
 
 jobs:
   deploy:
