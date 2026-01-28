@@ -1,0 +1,15 @@
+{
+  "name": "appointment",
+  "version": "1.0.0",
+  "main": "appointment-service.js",
+  "scripts": {
+    "start": "node appointment-service.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
