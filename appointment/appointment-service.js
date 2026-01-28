@@ -30,7 +30,7 @@ const express = require('express');
           appointment: appointment 
         });
       } else {
-        res.status(404).json({ error: 'Appointment not found' });
+        res.status(404).json({ error: 'Appointment not-found' });
       }
     });
     
