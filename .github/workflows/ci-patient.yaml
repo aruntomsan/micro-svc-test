@@ -9,7 +9,7 @@ on:
 env:
   ECR_REGISTRY: 014498640594.dkr.ecr.ap-south-1.amazonaws.com
   REPO_NAME: dev-appointment
-  MANIFEST_REPO: https://github.com/aruntomsan/k8-manifests
+  MANIFEST_REPO: aruntomsan/k8-manifests
   MANIFEST_FILE: appointment-deploy.yaml
 
 jobs:
