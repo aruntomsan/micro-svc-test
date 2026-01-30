@@ -49,7 +49,7 @@ const express = require('express');
         };
         appointments.push(newAppointment);
         res.status(201).json({ 
-          message: 'Appointment scheduled successfully',
+          message: 'Appointment scheduled successfully!',
           appointment: newAppointment 
         });
       } catch (error) {
