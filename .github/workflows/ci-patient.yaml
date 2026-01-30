@@ -2,7 +2,7 @@ name: Update Manifest for Patient Service
 
 on:
   workflow_run:
-    workflows: ["Build Appointment Service"]
+    workflows: ["Build Patient Service"]
     types:
       - completed
 
