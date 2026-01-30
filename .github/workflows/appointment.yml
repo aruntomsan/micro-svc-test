@@ -36,3 +36,11 @@ jobs:
           tags: |
             ${{ env.ECR_REGISTRY }}/${{ env.REPO_NAME }}:${{ github.sha }}
             ${{ env.ECR_REGISTRY }}/${{ env.REPO_NAME }}:latest
+
+      - name: Save Image Tag
+        run: echo "${{ github.sha }}" > image_tag.txt
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: image-tag-artifact
+          path: image_tag.txt

@@ -1,0 +1,53 @@
+name: Update Manifest for Appointment Service
+
+on:
+  workflow_run:
+    workflows: ["Build Appointment Service"]
+    types:
+      - completed
+
+env:
+  ECR_REGISTRY: 014498640594.dkr.ecr.ap-south-1.amazonaws.com
+  REPO_NAME: dev-appointment
+  MANIFEST_REPO: https://github.com/aruntomsan/k8-manifests
+  MANIFEST_FILE: appointment-deploy.yaml
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    
+    steps:
+      - name: Checkout Manifest Repository
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ env.MANIFEST_REPO }}
+          token: ${{ secrets.MANIFEST_REPO_PAT }} 
+          ref: main
+
+      - name: Download Image Tag
+        uses: dawidd6/action-download-artifact@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          workflow: "Build Appointment Service"
+          run_id: ${{ github.event.workflow_run.id }}
+          name: image-tag-artifact
+          
+      - name: Read Image Tag
+        id: get_tag
+        run: |
+          echo "IMAGE_TAG=$(cat image_tag.txt)" >> $GITHUB_ENV
+
+      - name: Update Image Tag and Push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Use the env var we just read from the file
+          NEW_TAG=${{ env.IMAGE_TAG }}
+          
+          sed -i "s|image: ${{ env.ECR_REGISTRY }}/${{ env.REPO_NAME }}:.*|image: ${{ env.ECR_REGISTRY }}/${{ env.REPO_NAME }}:$NEW_TAG|g" ${{ env.MANIFEST_FILE }}
+
+          git add ${{ env.MANIFEST_FILE }}
+          git commit -m "Deploy: Update image to $NEW_TAG"
+          git push origin main
