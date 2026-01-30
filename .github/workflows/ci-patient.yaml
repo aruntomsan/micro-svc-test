@@ -1,4 +1,4 @@
-name: Update Manifest for Appointment Service
+name: Update Manifest for Patient Service
 
 on:
   workflow_run:
