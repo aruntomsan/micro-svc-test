@@ -1,0 +1,14 @@
+inputSet:
+  name: Build_aruntomsan_micro_svc_test_1770111775713-push-trigger-input-set
+  identifier: Build_aruntomsan_micro_svc_test_1770111775713pushtriggerinputset
+  orgIdentifier: default
+  projectIdentifier: default_project
+  pipeline:
+    identifier: Build_aruntomsan_micro_svc_test_1770111775713
+    properties:
+      ci:
+        codebase:
+          build:
+            type: branch
+            spec:
+              branch: <+trigger.branch>
