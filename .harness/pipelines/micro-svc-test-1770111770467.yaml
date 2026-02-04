@@ -23,9 +23,22 @@ pipeline:
                   identifier: echo
                   name: echo
                   spec:
-                    command: echo hello world
+                    shell: Sh
+                    command: echo Starting dis shit
                   timeout: ""
                   type: Run
+              - step:
+                  type: BuildAndPushECR
+                  name: BuildAndPushECR_1
+                  identifier: BuildAndPushECR_1
+                  spec:
+                    connectorRef: apptdockerconnect
+                    region: ap-south-1
+                    account: "014498640594"
+                    imageName: " dev-appointment"
+                    tags:
+                      - version
+                    dockerfile: appointment/dockerfile
           platform:
             arch: Amd64
             os: Linux
